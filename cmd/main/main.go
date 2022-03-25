@@ -4,4 +4,5 @@ func main() {
 	mux := Routes()
 	server := NewServer(mux)
 	server.listen()
+
 }
