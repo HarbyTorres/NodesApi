@@ -18,8 +18,8 @@ func newClient(client ...api.DgraphClient) *dgo.Dgraph {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	newClient := dgo.NewDgraphClient(api.NewDgraphClient(conn))
+	//api.NewDgraphClient(conn)
+	newClient := dgo.NewDgraphClient()
 
 	defer conn.Close()
 
