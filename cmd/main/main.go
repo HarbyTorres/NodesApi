@@ -1,7 +1,12 @@
 package main
 
+import "apinodos/src/web/handlers"
+
 func main() {
-	mux := Routes()
+
+	drawflow := handlers.CreateSaveDrawflow()
+
+	mux := Routes(drawflow)
 	server := NewServer(mux)
 	server.listen()
 

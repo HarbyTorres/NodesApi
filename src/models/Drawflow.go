@@ -4,10 +4,10 @@ import "time"
 
 type Drawflow struct {
 	Id         uint64
-	Body       string
+	Body       map[string]interface{}
 	CreateDate time.Time
 }
 
 type CreateDrawflow struct {
-	Body string `json:"body"`
+	Body map[string]interface{} `json:"body"`
 }
