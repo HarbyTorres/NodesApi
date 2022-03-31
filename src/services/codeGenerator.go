@@ -1,8 +1,7 @@
 package services
 
-func codeGenerator() map[string]interface{} {
+import "apinodos/src/models"
 
-	var data map[string]interface{}
-	//err = json.Unmarshal(, &data)
-	return data
+func codeGenerator(n *models.Node) string {
+	return ""
 }
