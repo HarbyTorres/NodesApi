@@ -3,19 +3,20 @@ package repository
 import (
 	"apinodos/internal/database"
 	"context"
+	"fmt"
 	"log"
 )
 
 const q = `
 		{
-			all(func: anyofterms(name, "Alice Bob")) {
+			all(func: anyofterms()) {
 				uid
 				balance
 			}
 		}
 	`
 
-func getDrawflows() {
+func SaveDrawflows() {
 	dgClient := database.NewClient()
 	txn := dgClient.NewTxn()
 	resp, err := txn.Query(context.Background(), q)
@@ -23,8 +24,6 @@ func getDrawflows() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return resp
-}
+	fmt.Println(resp)
 
-// After we get the balances, we have to decode them into structs so that
-// we can manipulate the data.
+}
