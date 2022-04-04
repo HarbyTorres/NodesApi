@@ -18,7 +18,7 @@ func Routes(dfh *handlers.SaveDrawflow) *chi.Mux {
 	)
 
 	mux.Get("/hello", HelloWorld)
-	mux.Post("/save", dfh.SaveDrawflow)
+	mux.Post("/drawflow", dfh.SaveDrawflow)
 	return mux
 }
 

@@ -10,6 +10,8 @@ require (
 )
 
 require (
+	github.com/dgraph-io/dgo/v2 v2.2.0
+	github.com/dgraph-io/dgo/v210 v210.0.0-20220113041351-ba0e5dfc4c3e
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
