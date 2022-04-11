@@ -17,16 +17,9 @@ func (*SaveDrawflow) SaveDrawflow(w http.ResponseWriter, r *http.Request) {
 	var data map[string]interface{}
 
 	encoder := json.NewDecoder(r.Body)
-	encoder.Decode(&data)
-
-	err := json.Unmarshal([]byte(), &draw)
-
-	if err != nil {
-		panic(err)
-	}
+	encoder.Decode(&draw)
 
 	fmt.Printf("\n\n json object:::: %v", draw)
-	fmt.Println(data)
 	_ = json.NewEncoder(w).Encode(data)
 }
 

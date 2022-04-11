@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/dgraph-io/dgo/protos/api"
 	"github.com/dgraph-io/dgo/v200"
+	"github.com/dgraph-io/dgo/v200/protos/api"
 	"github.com/joho/godotenv"
 )
 
@@ -20,7 +20,7 @@ func NewClient() *dgo.Dgraph {
 	defer conn.Close()
 	dc := api.NewDgraphClient(conn)
 	fmt.Println(dc)
-	dg := dgo.NewDgraphClient()
+	dg := dgo.NewDgraphClient(dc)
 	return dg
 
 }
