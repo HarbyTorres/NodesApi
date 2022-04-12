@@ -1,7 +1,7 @@
 package models
 
 type Node struct {
-	id       uint64
+	Id       uint64
 	name     string
 	data     Data
 	class    string
@@ -9,8 +9,6 @@ type Node struct {
 	typeNode string
 	inputs   Input
 	outputs  Output
-	posx     int64
-	posy     int64
 }
 
 type Data struct {
