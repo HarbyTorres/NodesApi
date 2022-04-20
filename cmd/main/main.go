@@ -5,8 +5,8 @@ import "apinodos/src/web/handlers"
 func main() {
 
 	drawflow := handlers.CreateSaveDrawflow()
-
-	mux := Routes(drawflow)
+	code := handlers.CreateCodeGenerator()
+	mux := Routes(drawflow, code)
 	server := NewServer(mux)
 	server.listen()
 

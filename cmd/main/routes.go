@@ -9,7 +9,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 )
 
-func Routes(dfh *handlers.SaveDrawflow) *chi.Mux {
+func Routes(dfh *handlers.SaveDrawflow, cdg *handlers.CodeGenerator) *chi.Mux {
 	mux := chi.NewMux()
 
 	mux.Use(
@@ -19,6 +19,7 @@ func Routes(dfh *handlers.SaveDrawflow) *chi.Mux {
 
 	mux.Get("/hello", HelloWorld)
 	mux.Post("/drawflow", dfh.SaveDrawflow)
+	mux.Post("/code", cdg.GenerateCodeHandler)
 	return mux
 }
 
