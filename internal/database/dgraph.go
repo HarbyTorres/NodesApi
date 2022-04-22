@@ -39,7 +39,7 @@ func NewQuery(payload *strings.Reader) ([]byte, error) {
 /*
 func NewClient() *dgo.Dgraph {
 	//apiURL, apiKey := getApiConfig()
-		conn, err := dgo.DialCloud("https://blue-surf-590117.us-east-1.aws.cloud.dgraph.io/graphql", "NzVlYWMzMjUxODhmYWI2OGE3MTA3YmMxZGY3ZjNjYmQ=")
+		conn, err := dgo.DialCloud()
 		if err != nil {
 			log.Fatal(err)
 		}

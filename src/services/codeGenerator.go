@@ -7,10 +7,10 @@ import (
 	"strconv"
 )
 
-type CodeGenerator2 struct {
+type CodeGenerator struct {
 }
 
-func CodeGenerator(draw models.DrawflowMap) string {
+func (*CodeGenerator) GenerateCode(draw models.DrawflowMap) string {
 	var nodes []models.Node
 	nodes = processDrawflowMap(draw)
 

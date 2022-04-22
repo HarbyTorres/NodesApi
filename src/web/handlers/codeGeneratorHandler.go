@@ -8,13 +8,14 @@ import (
 )
 
 type CodeGenerator struct {
+	codeGenerator services.CodeGenerator
 }
 
-func (*CodeGenerator) GenerateCodeHandler(w http.ResponseWriter, r *http.Request) {
+func (c *CodeGenerator) GenerateCodeHandler(w http.ResponseWriter, r *http.Request) {
 	var draw models.DrawflowMap
 	encoder := json.NewDecoder(r.Body)
 	encoder.Decode(&draw)
-	response := services.CodeGenerator(draw)
+	response := c.codeGenerator.GenerateCode(draw)
 	_ = json.NewEncoder(w).Encode(response)
 }
 
