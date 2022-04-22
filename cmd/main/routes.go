@@ -1,26 +1,26 @@
 package main
 
 import (
-	"apinodos/src/repository"
 	"apinodos/src/web/handlers"
 	"encoding/json"
 	"net/http"
 
 	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
 )
 
-func Routes(dfh *handlers.SaveDrawflow, cdg *handlers.CodeGenerator, gdf *repository.GetDrawflow) *chi.Mux {
+func Routes(dfh *handlers.DrawflowHandler, cdg *handlers.CodeGenerator) *chi.Mux {
 	mux := chi.NewMux()
-	/*
-		mux.Use(
-			middleware.Logger,
-			middleware.Recoverer,
-		)
-	*/
+
+	mux.Use(
+		middleware.Logger,
+		middleware.Recoverer,
+	)
+
 	mux.Get("/hello", HelloWorld)
 	mux.Post("/drawflow", dfh.SaveDrawflow)
 	mux.Post("/code", cdg.GenerateCodeHandler)
-	mux.Get("/drawflow", gdf.GetFile)
+	mux.Get("/drawflow", dfh.GetDrawflows)
 	return mux
 }
 

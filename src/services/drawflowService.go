@@ -1,9 +1,9 @@
 package services
 
 import (
+	"apinodos/internal/database"
 	"apinodos/src/models"
 	"apinodos/src/repository"
-	"strings"
 
 	"github.com/dgraph-io/dgo/v210/protos/api"
 )
@@ -15,18 +15,40 @@ type DrawflowService interface {
 type DrawflowSvc struct {
 }
 
-func (d DrawflowSvc) Create(dr models.CreateDrawflow) *strings.Reader {
+func (d DrawflowSvc) GetAll() ([]byte, error) {
 
 	muttation := repository.CreateDrawflowMuttations()
+
+	payload := muttation.GetDrawflows()
+
+	response, err := database.NewQuery(payload)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (d DrawflowSvc) Create(dr models.CreateDrawflow) ([]byte, error) {
+
+	muttation := repository.CreateDrawflowMuttations()
+
+	payload := muttation.SaveDrawflow()
+
+	response, err := database.NewQuery(payload)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
 
 	/*
 		draw, err := json.Marshal(dr)
 		if err != nil {
 			panic(err)
 		}*/
-
-	payload := muttation.SaveDrawflow()
-
 	/*
 		dgClient := database.NewClient()
 		txn := dgClient.NewTxn()
@@ -37,6 +59,4 @@ func (d DrawflowSvc) Create(dr models.CreateDrawflow) *strings.Reader {
 
 		resp, err := txn.Mutate(context.Background(), mutDraw)
 	*/
-
-	return payload
 }

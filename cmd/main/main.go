@@ -1,16 +1,14 @@
 package main
 
 import (
-	"apinodos/src/repository"
 	"apinodos/src/web/handlers"
 )
 
 func main() {
 
-	drawflow := handlers.CreateSaveDrawflow()
+	drawflow := handlers.CreateDrawflowHandler()
 	code := handlers.CreateCodeGenerator()
-	drawflowget := repository.CreateGetDrawflow()
-	mux := Routes(drawflow, code, drawflowget)
+	mux := Routes(drawflow, code)
 	server := NewServer(mux)
 	server.listen()
 

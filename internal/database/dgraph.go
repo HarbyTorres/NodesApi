@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -11,11 +12,8 @@ import (
 )
 
 func NewQuery(payload *strings.Reader) ([]byte, error) {
-	//apiURL, apiKey := getApiConfig()
-	//url := fmt.Sprintf("%v?client=%v", apiURL, apiKey)
-	url := "https://blue-surf-590117.us-east-1.aws.cloud.dgraph.io/graphql?postman=MjhmYjlkYmZlMTUxMWY4NGYyYjk4MGMzZWFhODU5Y2Q="
-
-	//payload := strings.NewReader("{\"query\":\"query MyQuery {\\r\\n  getUser(id: \\\"0xfffd8d67db0bee2d\\\") {\\r\\n    id\\r\\n    email\\r\\n    name\\r\\n    password\\r\\n  }\\r\\n}\",\"variables\":{}}")
+	apiURL, apiKey := getApiConfig()
+	url := fmt.Sprintf("%v?client=%v", apiURL, apiKey)
 
 	client := &http.Client{}
 	req, err := http.NewRequest("POST", url, payload)
