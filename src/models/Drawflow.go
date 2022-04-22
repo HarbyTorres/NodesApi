@@ -6,12 +6,15 @@ import (
 
 type Drawflow struct {
 	Id         uint64
+	Name       string
 	Body       DrawflowMap
 	CreateDate time.Time
 }
 
 type CreateDrawflow struct {
-	Body DrawflowMap `json:"body"`
+	Name  string      `json:"name"`
+	Body  DrawflowMap `json:"body"`
+	DType []string    `json:"dgraph.type,omitempty"`
 }
 
 type DrawflowMap struct {

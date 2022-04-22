@@ -1,29 +1,18 @@
 package repository
 
 import (
-	"apinodos/internal/database"
-	"context"
-	"fmt"
-	"log"
+	"strings"
 )
 
-const q = `
-		{
-			all(func: anyofterms()) {
-				uid
-				balance
-			}
-		}
-	`
+type DrawflowMuttations struct {
+}
 
-func SaveDrawflows() {
-	dgClient := database.NewClient()
-	txn := dgClient.NewTxn()
-	resp, err := txn.Query(context.Background(), q)
+func CreateDrawflowMuttations() *DrawflowMuttations {
+	return &DrawflowMuttations{}
+}
 
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(resp)
+func (d *DrawflowMuttations) SaveDrawflow() *strings.Reader {
+	payload := strings.NewReader("{\"query\":\"mutation MyMutation {\\r\\n  addDrawflow(input: {body: \\\"drawflowtest3\\\", crateDate: \\\"2022-04-22\\\", name: \\\"drawformback2\\\"}) {\\r\\n    numUids\\r\\n  }\\r\\n}\",\"variables\":{}}")
 
+	return payload
 }

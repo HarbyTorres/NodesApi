@@ -1,10 +1,11 @@
 package handlers
 
 import (
+	"apinodos/internal/database"
 	"apinodos/src/models"
+	"apinodos/src/services"
 	"encoding/json"
 	"net/http"
-	"strconv"
 )
 
 type SaveDrawflow struct {
@@ -12,28 +13,17 @@ type SaveDrawflow struct {
 
 func (*SaveDrawflow) SaveDrawflow(w http.ResponseWriter, r *http.Request) {
 	//var node models.Node
-	var draw models.DrawflowMap
-
+	var drawflowSvs services.DrawflowSvc
+	var draw models.CreateDrawflow
 	encoder := json.NewDecoder(r.Body)
 	encoder.Decode(&draw)
+	payload := drawflowSvs.Create(draw)
 
-	var nodes []models.Node
-	for i := 1; i <= len(draw.Drawflow.Home.Data); i++ {
-
-		var node models.Node
-		jsonbody, err := json.Marshal(draw.Drawflow.Home.Data[strconv.Itoa(i)])
-		if err != nil {
-			panic(err)
-		}
-		if err := json.Unmarshal(jsonbody, &node); err != nil {
-			panic(err)
-		}
-
-		//nodeDe, _ := draw.Drawflow.Home.Data[strconv.Itoa(i)].(models.Node)
-		nodes = append(nodes, node)
+	response, err := database.NewQuery(payload)
+	if err != nil {
+		panic(err)
 	}
-
-	_ = json.NewEncoder(w).Encode(nodes)
+	_ = json.NewEncoder(w).Encode(response)
 }
 
 func CreateSaveDrawflow() *SaveDrawflow {
