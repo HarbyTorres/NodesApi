@@ -21,6 +21,7 @@ func Routes(dfh *handlers.DrawflowHandler, cdg *handlers.CodeGenerator) *chi.Mux
 	mux.Post("/drawflow", dfh.SaveDrawflow)
 	mux.Post("/code", cdg.GenerateCodeHandler)
 	mux.Get("/drawflow", dfh.GetDrawflows)
+	mux.Options("/drawflow", dfh.GetDrawflows)
 	return mux
 }
 
