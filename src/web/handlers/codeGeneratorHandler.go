@@ -12,6 +12,11 @@ type CodeGenerator struct {
 }
 
 func (c *CodeGenerator) GenerateCodeHandler(w http.ResponseWriter, r *http.Request) {
+	allowedHeaders := "Accept, Content-Type, Content-Length, Accept-Encoding, Authorization,X-CSRF-Token"
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", allowedHeaders)
+	w.Header().Set("Content-Type", "application/")
 	var draw models.DrawflowMap
 	encoder := json.NewDecoder(r.Body)
 	encoder.Decode(&draw)

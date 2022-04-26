@@ -35,7 +35,7 @@ func (d DrawflowSvc) GetAll() (models.DgraphMapping, error) {
 func (d DrawflowSvc) Create(dr models.CreateDrawflow) ([]byte, error) {
 
 	muttation := repository.CreateDrawflowMuttations()
-	payload := muttation.SaveDrawflow()
+	payload := muttation.SaveDrawflow(dr)
 	response, err := database.NewQuery(payload)
 	if err != nil {
 		return nil, err
