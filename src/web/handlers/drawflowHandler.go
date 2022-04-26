@@ -27,15 +27,17 @@ func (d *DrawflowHandler) SaveDrawflow(w http.ResponseWriter, r *http.Request) {
 }
 
 func (d *DrawflowHandler) GetDrawflows(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/")
 	response, err := d.drawflowSvs.GetAll()
 	if err != nil {
 		panic(err)
 	}
 	//res := string(response)
+
 	//out, _ := json.Marshal(res)
 
-	_ = json.NewEncoder(w).Encode(string(response))
+	_ = json.NewEncoder(w).Encode(response)
 }
 
 func CreateDrawflowHandler() *DrawflowHandler {

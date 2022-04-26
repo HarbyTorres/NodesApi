@@ -1,13 +1,14 @@
 package repository
 
 import (
+	"apinodos/src/models"
 	"strings"
 )
 
 type DrawflowMuttations struct {
 }
 
-func (d *DrawflowMuttations) SaveDrawflow() *strings.Reader {
+func (d *DrawflowMuttations) SaveDrawflow(draw models.CreateDrawflow) *strings.Reader {
 
 	payload := strings.NewReader("{\"query\":\"mutation MyMutation {\\r\\n  addDrawflow(input: {body: \\\"drawflowtest3\\\", crateDate: \\\"2022-04-22\\\", name: \\\"drawformback2\\\"}) {\\r\\n    numUids\\r\\n  }\\r\\n}\",\"variables\":{}}")
 
