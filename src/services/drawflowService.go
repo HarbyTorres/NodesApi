@@ -5,6 +5,7 @@ import (
 	"apinodos/src/models"
 	"apinodos/src/repository"
 	"encoding/json"
+	"strings"
 
 	"github.com/dgraph-io/dgo/v210/protos/api"
 )
@@ -25,7 +26,9 @@ func (d DrawflowSvc) GetAll() (models.DgraphMapping, error) {
 	if err != nil {
 		return mapping, err
 	}
-	if err := json.Unmarshal(response, &mapping); err != nil {
+	res := []byte(process(string(response)))
+
+	if err := json.Unmarshal(res, &mapping); err != nil {
 		return mapping, err
 	}
 
@@ -41,4 +44,11 @@ func (d DrawflowSvc) Create(dr models.CreateDrawflow) ([]byte, error) {
 		return nil, err
 	}
 	return response, nil
+}
+
+func process(str string) string {
+	str2 := strings.ReplaceAll((strings.ReplaceAll(string(str), "\"body\":[\"", "\"body\":")), "}}}}}\"]", "}}}}}")
+	str2 = strings.ReplaceAll(str2, "'", "\"")
+
+	return str2
 }

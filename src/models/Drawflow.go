@@ -4,13 +4,6 @@ import (
 	"time"
 )
 
-type Drawflow struct {
-	Id         uint64
-	Name       string
-	Body       DrawflowMap
-	CreateDate time.Time
-}
-
 type CreateDrawflow struct {
 	Name  string      `json:"name"`
 	Body  DrawflowMap `json:"body"`
@@ -28,11 +21,10 @@ type DrawflowMap struct {
 type DgraphMapping struct {
 	Data struct {
 		QueryDrawflow []struct {
-			Body      interface{} `json:"body"`
-			CrateDate interface{} `json:"crateDate,omitempty"`
+			Body      DrawflowMap `json:"body"`
 			ID        string      `json:"id"`
-			Name      interface{} `json:"name"`
-			CrteDate  time.Time   `json:"crteDate,omitempty"`
+			Name      string      `json:"name"`
+			CreatedAt time.Time   `json:"createdAt,omitempty"`
 		} `json:"queryDrawflow"`
 	} `json:"data"`
 	Extensions struct {

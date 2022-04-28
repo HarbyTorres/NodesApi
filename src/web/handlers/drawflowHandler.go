@@ -24,11 +24,12 @@ func (d *DrawflowHandler) SaveDrawflow(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+
 	response, err := d.drawflowSvs.Create(draw)
 	if err != nil {
 		panic(err)
 	}
-	_ = json.NewEncoder(w).Encode(response)
+	_ = json.NewEncoder(w).Encode(string(response))
 }
 
 func (d *DrawflowHandler) GetDrawflows(w http.ResponseWriter, r *http.Request) {

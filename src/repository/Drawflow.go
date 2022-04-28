@@ -12,27 +12,21 @@ type DrawflowMuttations struct {
 }
 
 func (d *DrawflowMuttations) SaveDrawflow(draw models.CreateDrawflow) *strings.Reader {
-
-	jsonbody, err := json.Marshal(draw.Body.Drawflow.Home.Data)
+	t := time.Now()
+	jsonbody, err := json.Marshal(draw.Body)
 	if err != nil {
 		panic(err)
 	}
-
-	t := time.Now()
+	res := strings.ReplaceAll(string(jsonbody), "\"", "'")
 	date := fmt.Sprintf("%d-%02d-%02d",
 		t.Year(), t.Month(), t.Day(),
 	)
-
 	data := fmt.Sprintf("{\"query\":\"mutation MyMutation {\\r\\n  addDrawflow(input: {body: \\\"%v\\\", createdAt: \\\"%v\\\", name: \\\"%v\\\"}) {\\r\\n    numUids\\r\\n  }\\r\\n}\",\"variables\":{}}",
-		jsonbody,
+		res,
 		date,
 		draw.Name,
 	)
-	fmt.Println(data)
-
-	payload := strings.NewReader(data)
-
-	return payload
+	return strings.NewReader(data)
 }
 
 func (d *DrawflowMuttations) GetDrawflows() *strings.Reader {
